@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="main" style="height:900px"></div>
+        <ul class="legend">
+            <li class="add-user"><span class="icon"></span><span class="tit">新增客户</span></li>
+            <li class="repay-user"><span class="icon"></span><span class="tit">还款客户</span></li>
+            <li class="loan-user"><span class="icon"></span><span class="tit">借款客户</span></li>
+            <li class="repayment"><span class="icon"></span><span class="tit">还款</span></li>
+            <li class="loanment"><span class="icon"></span>借款</li>
+        </ul>
+
+    <link href="./css/common.css" rel="stylesheet" type="text/css">
+    <script src="js/lib/jquery.min.js"></script>
+    <script src="./js/lib/core.js"></script>
+    <script src="./js/sea-modules/sea.js"></script>
+    <script src="js/lib/echarts.min.js"></script>
+    <script src="js/lib/china.js"></script>
+    <script>
+        var v = parseInt(+new Date() / 3600000);
+
+        seajs.config({
+
+            alias: {},
+
+            vars: {
+                'locale': 'zh-cn'
+            },
+
+            paths: {
+                'modules': './js/modules/'
+            },
+
+            map: [
+                ['.js', '.js?t=' + v]
+            ],
+
+            charset: 'utf-8'
+
+        });
+        seajs.use('modules/index', function (index) {
+            index.init();
+        });
+
+    </script>
+</body>
+
+</html>
