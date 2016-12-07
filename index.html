@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>达飞七贷</title>
+
+    <!-- Bootstrap -->
+    <!--<link href="css/bootstrap.min.css" rel="stylesheet">-->
+    <link href="./css/common.css" rel="stylesheet" type="text/css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <!--<script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>-->
+    <!--<script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>-->
+
+    <![endif]-->
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row map_data">
+        <div class="col-md-12">
+            <div id="main"></div>
+            <!--<div class="big-circle">-->
+            <!--</div>-->
+            <div class="loan-box js_right_box" style="display: none;">
+                <div class="loan-box-item currently_on_loan">
+                    <h5>当前在贷金额</h5>
+                    <p id="js_total_currently_on_loan" class="desc-num"></p>
+                </div>
+                <div class="loan-box-item accumulated_loans">
+                    <h5>累计放款金额</h5>
+                    <p id="js_total_accumulated_loans" class="desc-num"></p>
+                </div>
+            </div>
+            <div class="scroll-box" style="display: none;">
+                <div class="sub-menu"><span>城市</span><span>类型</span><span>金额</span></div>
+                <ul class="js_scroll_ul">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="./js/lib/jquery.min.js"></script>
+<script src="./js/lib/core.js"></script>
+<script src="./js/sea-modules/sea.js"></script>
+<script src="js/lib/echarts.min.js"></script>
+<script src="js/lib/china.js"></script>
+<script src="js/lib/countUp.js"></script>
+<script>
+
+    ;(function (doc, win) {
+        var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    // docEl.style.fontSize = 100 * (clientWidth / 320) + 'px';
+                    docEl.style.fontSize = clientWidth / 64 + 'px';
+                    var currentHeight = window.innerHeight;
+                    $('#main').css('height', currentHeight + 'px');
+                };
+        // Abort if browser does not support addEventListener
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+
+    $(function(){
+        var v = parseInt(+new Date() / 3600000);
+
+        seajs.config({
+
+            alias: {},
+
+            vars: {
+                'locale': 'zh-cn'
+            },
+
+            paths: {
+                'modules': './js/modules/'
+            },
+
+            map: [
+                ['.js', '.js?t=' + v]
+            ],
+
+            charset: 'utf-8'
+
+        });
+        seajs.use('modules/index', function (index) {
+            index.init();
+        });
+    })
+
+</script>
+</body>
+</html>
